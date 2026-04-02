@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Login Type - Mini Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="signin-card">
+            <div class="header">
+                <h1>Choose Your Login Type</h1>
+                <p>Select how you want to access your account</p>
+            </div>
+            
+            <div class="login-options">
+                <div class="login-option-card" onclick="redirectToLogin('import')">
+                    <div class="option-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                        </svg>
+                    </div>
+                    <h3>Import Login</h3>
+                    <p>Access your account for importing data and managing imports</p>
+                    <div class="option-features">
+                        <span class="feature-tag">Data Import</span>
+                        <span class="feature-tag">File Management</span>
+                        <span class="feature-tag">Import History</span>
+                    </div>
+                </div>
+                
+                <div class="login-option-card" onclick="redirectToLogin('bidding')">
+                    <div class="option-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+                        </svg>
+                    </div>
+                    <h3>Bidding Frame Login</h3>
+                    <p>Access your account for bidding and auction management</p>
+                    <div class="option-features">
+                        <span class="feature-tag">Live Bidding</span>
+                        <span class="feature-tag">Auction Management</span>
+                        <span class="feature-tag">Bid History</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="back-to-signup">
+                <p>Want to create a different account? <a href="signup.html">Sign up again</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function redirectToLogin(type) {
+            if (type === 'import') {
+                window.location.href = 'import-login.html';
+            } else if (type === 'bidding') {
+                window.location.href = 'bidding-login.html';
+            }
+        }
+    </script>
+</body>
+</html>
+

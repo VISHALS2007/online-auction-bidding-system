@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mini Project</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <span id="userInitial">U</span>
+                    </div>
+                    <div class="user-details">
+                        <span id="userName">User</span>
+                        <span id="userEmail">user@example.com</span>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="welcome-section">
+                <h2>Welcome back, <span id="welcomeName">User</span>!</h2>
+                <p>Here's your account information and activity.</p>
+            </div>
+
+            <!-- Portal Selection -->
+            <div class="portal-selection">
+                <h3>Choose Your Portal</h3>
+                <div class="portal-cards">
+                    <div class="portal-card import-portal" onclick="switchToPortal('import')">
+                        <div class="portal-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                            </svg>
+                        </div>
+                        <h4>Import the Product</h4>
+                        <p>Manage your product imports and data</p>
+                        <div class="portal-features">
+                            <span class="feature-tag">Data Import</span>
+                            <span class="feature-tag">File Management</span>
+                            <span class="feature-tag">Product Catalog</span>
+                        </div>
+                    </div>
+                    
+                    <div class="portal-card bidding-portal" onclick="switchToPortal('bidding')">
+                        <div class="portal-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+                            </svg>
+                        </div>
+                        <h4>Bidder</h4>
+                        <p>Participate in auctions and manage bids</p>
+                        <div class="portal-features">
+                            <span class="feature-tag">Live Bidding</span>
+                            <span class="feature-tag">Auction Management</span>
+                            <span class="feature-tag">Bid History</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Import Portal Content -->
+            <div id="importContent" class="import-content" style="display: none;">
+                <div class="import-header">
+                    <h3>Import the Product</h3>
+                    <p>Choose your import type to get started</p>
+                </div>
+                
+                <div class="import-frames">
+                    <div class="import-frame product-frame" onclick="openProductForm()">
+                        <div class="frame-icon">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,2A3,3 0 0,1 15,5V7A3,3 0 0,1 12,10A3,3 0 0,1 9,7V5A3,3 0 0,1 12,2M12,12A5,5 0 0,0 17,17V19A1,1 0 0,1 16,20H8A1,1 0 0,1 7,19V17A5,5 0 0,0 12,12Z"/>
+                            </svg>
+                        </div>
+                        <h4>Product</h4>
+                        <p>Import and manage product data</p>
+                        <div class="frame-features">
+                            <span class="feature-tag">Product Catalog</span>
+                            <span class="feature-tag">Inventory</span>
+                            <span class="feature-tag">Pricing</span>
+                        </div>
+                    </div>
+                    
+                    <div class="import-frame property-frame" onclick="switchToImportFrame('property')">
+                        <div class="frame-icon">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,2L2,7L12,12L22,7L12,2M2,17L12,22L22,17M2,12L12,17L22,12"/>
+                            </svg>
+                        </div>
+                        <h4>Property</h4>
+                        <p>Import and manage property data</p>
+                        <div class="frame-features">
+                            <span class="feature-tag">Real Estate</span>
+                            <span class="feature-tag">Property Details</span>
+                            <span class="feature-tag">Location Data</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Frame Content -->
+            <div id="productContent" class="frame-content" style="display: none;">
+                <div class="frame-header">
+                    <button class="back-btn" onclick="switchToImportFrame('back')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+                        </svg>
+                        Back to Import
+                    </button>
+                    <h3>Product Details</h3>
+                    <p>Add your product information for auction</p>
+                </div>
+                
+                <form class="product-form" id="productForm">
+                    <!-- Basic Product Information -->
+                    <div class="form-section">
+                        <h4>📦 Basic Product Information</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productName">Product Name *</label>
+                                <input type="text" id="productName" name="productName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">Quantity *</label>
+                                <input type="number" id="quantity" name="quantity" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="rate">Rate (Starting Bid) *</label>
+                                <input type="number" id="rate" name="rate" min="0" step="0.01" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Images -->
+                    <div class="form-section">
+                        <h4>🖼️ Product Images</h4>
+                        <div class="image-upload-area">
+                            <input type="file" id="productImages" name="productImages" multiple accept="image/*" style="display: none;">
+                            <div class="upload-zone" onclick="document.getElementById('productImages').click()">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                </svg>
+                                <p>Click to upload product images</p>
+                                <span>Multiple photos supported</span>
+                            </div>
+                            <div id="imagePreview" class="image-preview"></div>
+                        </div>
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="form-section">
+                        <h4>📝 Product Description</h4>
+                        <div class="form-group">
+                            <label for="description">Detailed Description *</label>
+                            <textarea id="description" name="description" rows="4" required placeholder="Describe your product in detail..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Auction Details -->
+                    <div class="form-section">
+                        <h4>⏱️ Auction Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="auctionEndTime">Auction End Time *</label>
+                                <input type="datetime-local" id="auctionEndTime" name="auctionEndTime" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category *</label>
+                                <select id="category" name="category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="electronics">Electronics</option>
+                                    <option value="art">Art & Collectibles</option>
+                                    <option value="cars">Cars & Vehicles</option>
+                                    <option value="jewelry">Jewelry & Watches</option>
+                                    <option value="fashion">Fashion & Accessories</option>
+                                    <option value="home">Home & Garden</option>
+                                    <option value="sports">Sports & Recreation</option>
+                                    <option value="books">Books & Media</option>
+                                    <option value="antiques">Antiques</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seller Information -->
+                    <div class="form-section">
+                        <h4>👤 Seller Information</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sellerName">Seller Name *</label>
+                                <input type="text" id="sellerName" name="sellerName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sellerEmail">Contact Email *</label>
+                                <input type="email" id="sellerEmail" name="sellerEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sellerPhone">Contact Phone</label>
+                                <input type="tel" id="sellerPhone" name="sellerPhone">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Details -->
+                    <div class="form-section">
+                        <h4>🏷️ Additional Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="condition">Product Condition *</label>
+                                <select id="condition" name="condition" required>
+                                    <option value="">Select Condition</option>
+                                    <option value="new">New</option>
+                                    <option value="like-new">Like New</option>
+                                    <option value="good">Good</option>
+                                    <option value="fair">Fair</option>
+                                    <option value="poor">Poor</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="shippingCost">Shipping Cost</label>
+                                <input type="number" id="shippingCost" name="shippingCost" min="0" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">Create Product Listing</button>
+                        <button type="button" class="preview-btn" onclick="previewProduct()">Preview Product</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Property Frame Content -->
+            <div id="propertyContent" class="frame-content" style="display: none;">
+                <div class="frame-header">
+                    <button class="back-btn" onclick="switchToImportFrame('back')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+                        </svg>
+                        Back to Import
+                    </button>
+                    <h3>Property Import</h3>
+                    <p>Manage your property data and real estate</p>
+                </div>
+                
+                <div class="property-tools">
+                    <div class="tool-card">
+                        <div class="tool-icon">🏠</div>
+                        <h4>Property Listings</h4>
+                        <p>Manage your property inventory</p>
+                        <button class="tool-btn">View Listings</button>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">📍</div>
+                        <h4>Location Data</h4>
+                        <p>Import and manage location information</p>
+                        <button class="tool-btn">Manage Locations</button>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">📋</div>
+                        <h4>Property Details</h4>
+                        <p>Set property specifications and features</p>
+                        <button class="tool-btn">Edit Details</button>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">📊</div>
+                        <h4>Market Analysis</h4>
+                        <p>Analyze property market trends</p>
+                        <button class="tool-btn">View Analysis</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👤</div>
+                    <div class="stat-content">
+                        <h3>Profile</h3>
+                        <p>Account active</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🕒</div>
+                    <div class="stat-content">
+                        <h3>Last Login</h3>
+                        <p id="lastLoginTime">Just now</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📧</div>
+                    <div class="stat-content">
+                        <h3>Email</h3>
+                        <p id="userEmailDisplay">user@example.com</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🆔</div>
+                    <div class="stat-content">
+                        <h3>User ID</h3>
+                        <p id="userId">Loading...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Information Section -->
+            <div class="info-section">
+                <h3>Account Information</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Full Name:</label>
+                        <span id="fullName">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Email Address:</label>
+                        <span id="emailAddress">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <label>User ID:</label>
+                        <span id="userIdDisplay">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Account Created:</label>
+                        <span id="accountCreated">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Last Login:</label>
+                        <span id="lastLoginDisplay">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Remember Me:</label>
+                        <span id="rememberMeStatus">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Users Section (Admin View) -->
+            <div class="users-section">
+                <h3>All Registered Users</h3>
+                <div class="users-table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Created</th>
+                                <th>Last Login</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Users will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Actions Section -->
+            <div class="actions-section">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="refreshData()">
+                        🔄 Refresh Data
+                    </button>
+                    <button class="action-btn" onclick="exportData()">
+                        📥 Export Data
+                    </button>
+                    <button class="action-btn" onclick="clearAllData()">
+                        🗑️ Clear All Data
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
+
